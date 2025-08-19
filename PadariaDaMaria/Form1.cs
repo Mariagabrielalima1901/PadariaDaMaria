@@ -26,17 +26,29 @@ namespace PadariaDaMaria
         {
             string nome = txbNome.Text;
             string rua = txbRua.Text;
+            string numero = txbNumero.Text;
             string bairro = txbBairro.Text;
             string cidade = txbCidade.Text;
-            string estado = txbEstado.Text;
+            string estado = txbCep.Text;
             string cep = txbCep.Text;
             MessageBox.Show("Nome:" + nome+
                             "\nRua:" + rua+
+                            "\nNumero" + numero+
                             "\nBairro:" + bairro+
                             "\nCidade:" + cidade+
                             "\nEstado:" + estado+
                             "\nCep:" + cep);
             
+        }
+
+        private void lblBairro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
