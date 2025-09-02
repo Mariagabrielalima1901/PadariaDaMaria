@@ -63,14 +63,13 @@ namespace PadariaDaMaria
                         cmd.Parameters.AddWithValue("@Nome", nome);
                         cmd.Parameters.AddWithValue("@Rua", rua);
                         cmd.Parameters.AddWithValue("@Numero", numero);
-                        cmd.Parameters.AddWithValue("@Bairro", bairro);
+                        cmd.Parameters.AddWithValue("@Bairro", bairro);               
                         cmd.Parameters.AddWithValue("@Cidade", cidade);
                         cmd.Parameters.AddWithValue("@Estado", estado);
                         cmd.Parameters.AddWithValue("@Cep", cep);
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-   }
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)
