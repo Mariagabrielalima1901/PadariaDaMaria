@@ -14,9 +14,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace PadariaDaMaria
 {
-    public partial class Form1 : Form
+    public partial class FrmCadastro : Form
     {
-        public Form1()
+        public FrmCadastro()
         {
             InitializeComponent();
         }

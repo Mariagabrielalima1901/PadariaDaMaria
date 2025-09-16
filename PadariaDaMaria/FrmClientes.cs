@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace PadariaDaMaria
 {
-    public partial class FrmClientes : Form
+    public partial class FrmCadastro : Form
     {
-        public FrmClientes()
+        public FrmCadastro()
         {
             InitializeComponent();
+        }
+
+        private void btnNovoCadastro_Click(object sender, EventArgs e)
+        {
+            FrmCadastro frmCadastro = new FrmCadastro();
+            frmCadastro.ShowDialog();
         }
     }
 }

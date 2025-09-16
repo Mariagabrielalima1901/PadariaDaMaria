@@ -1,6 +1,6 @@
 ﻿namespace PadariaDaMaria
 {
-    partial class Form1
+    partial class FrmCadastro
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -65,7 +65,7 @@
             this.lblNome.Size = new System.Drawing.Size(152, 18);
             this.lblNome.TabIndex = 1;
             this.lblNome.Text = "Nome Do Comércio \r\n";
-            this.lblNome.Click += new System.EventHandler(this.label1_Click);
+         
             // 
             // txbNome
             // 
@@ -159,7 +159,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(319, 20);
             this.textBox2.TabIndex = 14;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // txbNumero
             // 

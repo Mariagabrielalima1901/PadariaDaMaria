@@ -1,6 +1,6 @@
 ﻿namespace PadariaDaMaria
 {
-    partial class FrmClientes
+    partial class FrmCadastro
     {
         /// <summary>
         /// Required designer variable.
@@ -33,13 +33,15 @@
             this.txbNomeDoUsuario = new System.Windows.Forms.TextBox();
             this.lblSenha = new System.Windows.Forms.Label();
             this.txbSenha = new System.Windows.Forms.TextBox();
+            this.btnNovoCadastro = new System.Windows.Forms.Button();
+            this.lblNovoCadastro = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnEntrar
             // 
-            this.btnEntrar.Location = new System.Drawing.Point(285, 230);
+            this.btnEntrar.Location = new System.Drawing.Point(378, 223);
             this.btnEntrar.Name = "btnEntrar";
-            this.btnEntrar.Size = new System.Drawing.Size(75, 23);
+            this.btnEntrar.Size = new System.Drawing.Size(159, 24);
             this.btnEntrar.TabIndex = 0;
             this.btnEntrar.Text = "Entrar";
             this.btnEntrar.UseVisualStyleBackColor = true;
@@ -78,11 +80,32 @@
             this.txbSenha.Size = new System.Drawing.Size(238, 20);
             this.txbSenha.TabIndex = 4;
             // 
+            // btnNovoCadastro
+            // 
+            this.btnNovoCadastro.Location = new System.Drawing.Point(378, 289);
+            this.btnNovoCadastro.Name = "btnNovoCadastro";
+            this.btnNovoCadastro.Size = new System.Drawing.Size(159, 23);
+            this.btnNovoCadastro.TabIndex = 5;
+            this.btnNovoCadastro.Text = "Criar uma conta\r\n";
+            this.btnNovoCadastro.UseVisualStyleBackColor = true;
+            this.btnNovoCadastro.Click += new System.EventHandler(this.btnNovoCadastro_Click);
+            // 
+            // lblNovoCadastro
+            // 
+            this.lblNovoCadastro.AutoSize = true;
+            this.lblNovoCadastro.Location = new System.Drawing.Point(412, 260);
+            this.lblNovoCadastro.Name = "lblNovoCadastro";
+            this.lblNovoCadastro.Size = new System.Drawing.Size(97, 26);
+            this.lblNovoCadastro.TabIndex = 6;
+            this.lblNovoCadastro.Text = "Não tem cadastro?\r\n\r\n";
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblNovoCadastro);
+            this.Controls.Add(this.btnNovoCadastro);
             this.Controls.Add(this.txbSenha);
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.txbNomeDoUsuario);
@@ -102,5 +125,7 @@
         private System.Windows.Forms.TextBox txbNomeDoUsuario;
         private System.Windows.Forms.Label lblSenha;
         private System.Windows.Forms.TextBox txbSenha;
+        private System.Windows.Forms.Button btnNovoCadastro;
+        private System.Windows.Forms.Label lblNovoCadastro;
     }
 }
