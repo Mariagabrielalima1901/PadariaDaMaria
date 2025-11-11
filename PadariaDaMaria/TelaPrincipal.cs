@@ -10,17 +10,21 @@ using System.Windows.Forms;
 
 namespace PadariaDaMaria
 {
-    public partial class FrmClientes : Form
+    public partial class TelaPrincipal : Form
     {
-        public FrmClientes()
+        public TelaPrincipal()
         {
             InitializeComponent();
         }
 
-        private void btnNovoCadastro_Click(object sender, EventArgs e)
+        private void txbQuantidade_TextChanged(object sender, EventArgs e)
         {
-            FrmCadastro frmCadastro = new FrmCadastro();
-            frmCadastro.ShowDialog();
+
+        }
+
+        private void lblTipoDoProduto_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

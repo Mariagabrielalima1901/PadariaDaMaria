@@ -1,6 +1,6 @@
 ﻿namespace PadariaDaMaria
 {
-    partial class FrmCadastro
+    partial class FrmClientes
     {
         /// <summary>
         /// Required designer variable.
@@ -39,7 +39,7 @@
             // 
             // btnEntrar
             // 
-            this.btnEntrar.Location = new System.Drawing.Point(378, 223);
+            this.btnEntrar.Location = new System.Drawing.Point(378, 222);
             this.btnEntrar.Name = "btnEntrar";
             this.btnEntrar.Size = new System.Drawing.Size(159, 24);
             this.btnEntrar.TabIndex = 0;
