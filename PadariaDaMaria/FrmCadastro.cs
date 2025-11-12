@@ -1,92 +1,115 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Win32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace PadariaDaMaria
 {
-    public partial class FrmCadastro : Form
+    public partial class frmCadastro : Form
     {
-        public FrmCadastro()
+        // <<< CORRIGIDO AQUI >>>
+        // O Data Source foi atualizado para "sqlexpress" (igual ao seu print)
+        private string connectionString = @"Data Source=sqlexpress;Initial Catalog=CJ3027821PR2;User Id=aluno;Password=aluno;";
+
+        public frmCadastro()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        
+        private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnProximo_Click(object sender, EventArgs e)
-        {
-            string nome = txbNome.Text;
-            string rua = txbRua.Text;
-            string numero = txbNumero.Text;
-            string bairro = txbBairro.Text;
-            string cidade = txbCidade.Text;
-            string estado = txbCep.Text;
-            string cep = txbCep.Text;
-            MessageBox.Show("Nome:" + nome +
-                            "\nRua:" + rua +
-                            "\nNumero" + numero +
-                            "\nBairro:" + bairro +
-                            "\nCidade:" + cidade +
-                            "\nEstado:" + estado +
-                            "\nCep:" + cep);
-
-            string connectionString = "Server=sqlexpress;Database=CJ3027821PR2;USER ID=aluno;PASSWORD=aluno;";
-            // Se for usar login/senha SQL Server:
-            // string connectionString = "Server=SEU_SERVIDOR;Database=SEU_BANCO;User Id=usuario;Password=senha;";
-
-            // Comando SQL de INSERT com parâmetros
-            string query = @"INSERT INTO tabeladapadaria (Nome, Rua, Numero, Bairro, Cidade, Estado, Cep)
-                         VALUES (@Nome, @Rua, @Numero, @Bairro, @Cidade, @Estado, @Cep)";
+            if (!ValidarCampos())
+                return;
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    conn.Open();
+                    conn.Open(); // Se falhar aqui, o problema ainda é a conexão
+                    string query = @"
+INSERT INTO Usuarios 
+                                   (NomeCompleto, DataNascimento, Email, Telefone, Username, Senha) 
+                                   VALUES (@NomeCompleto, @DataNascimento, @Email, @Telefone, @Username, @Senha)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Passa os valores como parâmetros
-                        cmd.Parameters.AddWithValue("@Nome", nome);
-                        cmd.Parameters.AddWithValue("@Rua", rua);
-                        cmd.Parameters.AddWithValue("@Numero", numero);
-                        cmd.Parameters.AddWithValue("@Bairro", bairro);                
-                        cmd.Parameters.AddWithValue("@Cidade", cidade);
-                        cmd.Parameters.AddWithValue("@Estado", estado);
-                        cmd.Parameters.AddWithValue("@Cep", cep);
+                        cmd.Parameters.AddWithValue("@NomeCompleto", txtNomeCompleto.Text.Trim());
+                        cmd.Parameters.AddWithValue("@DataNascimento", dtpDataNascimento.Value);
+                        cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Telefone", txtTelefone.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Senha", txtSenha.Text);
 
-                        cmd.ExecuteNonQuery();
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Cadastro realizado com sucesso!", "Sucesso",
+                                          MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            frmLogin login = new frmLogin();
+                            login.Show();
+                            this.Close();
+                        }
                     }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601) 
+                {
+                    MessageBox.Show("Username ou E-mail já cadastrado!", "Erro",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"Erro no cadastro: {ex.Message}", "Erro",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao inserir dados: " + ex.Message);
+                MessageBox.Show($"Erro: {ex.Message}", "Erro",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrEmpty(txtNomeCompleto.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) ||
+                string.IsNullOrEmpty(txtTelefone.Text) ||
+                string.IsNullOrEmpty(txtUsername.Text) ||
+                string.IsNullOrEmpty(txtSenha.Text) ||
+                string.IsNullOrEmpty(txtConfirmarSenha.Text))
+            {
+                MessageBox.Show("Por favor, preencha todos os campos!", "Atenção",
+                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
 
+            if (txtSenha.Text != txtConfirmarSenha.Text)
+            {
+                MessageBox.Show("As senhas não coincidem!", "Atenção",
+                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (txtSenha.Text.Length < 6)
+            {
+                MessageBox.Show("A senha deve ter pelo menos 6 caracteres!", "Atenção",
+                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
         }
 
-        private void lblBairro_Click(object sender, EventArgs e)
+        private void btnVoltar_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
+            frmLogin login = new frmLogin();
+            login.Show();
+            this.Close();
         }
     }
 }
